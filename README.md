@@ -1,33 +1,61 @@
 # 🚖 Ride-Sharing Analytics & Cancellation Prediction
 
-### End-to-End Data Analytics & Machine Learning Project
+### SQL • Python • Machine Learning • Power BI • Streamlit
 
-**SQL • Python • Statistics • Machine Learning • SHAP • Power BI • Streamlit**
+**By Navdeep Taliyan**
 
-[![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python)](https://www.python.org/)
-[![MySQL](https://img.shields.io/badge/MySQL-8.0-orange?logo=mysql)](https://www.mysql.com/)
-[![Power BI](https://img.shields.io/badge/Power%20BI-Dashboard-yellow?logo=powerbi)](https://powerbi.microsoft.com/)
-[![Streamlit](https://img.shields.io/badge/Streamlit-App-red?logo=streamlit)](https://streamlit.io/)
-[![Scikit--learn](https://img.shields.io/badge/Scikit--learn-Machine%20Learning-F7931E?logo=scikit-learn)](https://scikit-learn.org/)
-[![SHAP](https://img.shields.io/badge/SHAP-Explainable%20AI-purple)](https://shap.readthedocs.io/)
+🔴 **Cancellation Risk Prediction + Business Intelligence Portfolio Project**
 
 ---
 
 ## 📌 Project Overview
 
-An end-to-end ride-sharing analytics and machine learning project focused on:
+An end-to-end ride-sharing analytics project analyzing **45K+ trip records** across riders, drivers, vehicles, locations, payments, and ratings.
 
-- 🚗 Ride demand and operational performance
-- 💰 Revenue and pricing analysis
-- 👥 Customer behavior and retention
-- ❌ Cancellation analysis
-- 🤖 Cancellation-risk prediction
-- 🔎 Explainable AI using SHAP
-- 📊 Business intelligence dashboards
+The project combines:
 
-The project combines **MySQL, Python, Statistics, Machine Learning, SHAP, Power BI, and Streamlit** to transform ride-sharing data into actionable business insights.
+- 🗄️ MySQL
+- 🐍 Python
+- 📊 Exploratory Data Analysis
+- 📈 Statistical Analysis
+- 🤖 Machine Learning
+- 🔎 SHAP Explainable AI
+- 📊 Power BI
+- 🚀 Streamlit
 
-> **Dataset:** Synthetic data created for portfolio and educational purposes. This project is not affiliated with Uber, Ola, Lyft, Rapido, or any other ride-sharing company.
+The goal is to understand **ride demand, revenue, driver performance, customer behavior, and cancellation risk** while building a leakage-safe machine learning pipeline for pre-trip cancellation prediction.
+
+---
+
+## 🎯 Business Objectives
+
+- Analyze ride demand across time and locations
+- Identify revenue and operational drivers
+- Evaluate driver and vehicle performance
+- Understand customer activity and retention
+- Identify factors associated with cancellations
+- Predict cancellation risk before a ride occurs
+- Explain model predictions using SHAP
+- Build decision-ready business dashboards
+- Translate analytical findings into operational recommendations
+
+---
+
+## 🛠 Tech Stack
+
+| Layer | Technologies |
+|---|---|
+| Database | MySQL |
+| SQL | CTEs, Window Functions, Views, Indexes |
+| Programming | Python |
+| Data Analysis | Pandas, NumPy |
+| Visualization | Matplotlib, Seaborn, Plotly |
+| Statistics | SciPy, Statsmodels |
+| Machine Learning | Scikit-learn, XGBoost |
+| Explainable AI | SHAP |
+| Business Intelligence | Power BI, DAX |
+| Application | Streamlit |
+| Version Control | Git & GitHub |
 
 ---
 
