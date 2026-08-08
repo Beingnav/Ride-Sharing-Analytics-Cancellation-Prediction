@@ -1,0 +1,82 @@
+table StatTests
+	lineageTag: 8d86d127-7691-44e2-8fe4-9769ad4284cc
+
+	column test_name
+		dataType: string
+		lineageTag: b05fc461-77f0-4496-a317-7ae01bd80c9e
+		summarizeBy: none
+		sourceColumn: test_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_question
+		dataType: string
+		lineageTag: 9884e4c9-7f20-46ac-9c76-42d2e190e7c3
+		summarizeBy: none
+		sourceColumn: business_question
+
+		annotation SummarizationSetBy = Automatic
+
+	column statistic
+		dataType: double
+		formatString: 0.0000
+		lineageTag: a4d24dfc-89cd-42d3-9ec5-b9d8442753d1
+		summarizeBy: none
+		sourceColumn: statistic
+
+		annotation SummarizationSetBy = Automatic
+
+	column p_value
+		dataType: double
+		formatString: 0.000000
+		lineageTag: 25917f09-0c7a-4a9d-82eb-1629d0b7f657
+		summarizeBy: none
+		sourceColumn: p_value
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'significant_at_0.05'
+		dataType: string
+		lineageTag: 26444e96-f17b-4862-a9cd-03f183d3a5ae
+		summarizeBy: none
+		sourceColumn: significant_at_0.05
+
+		annotation SummarizationSetBy = Automatic
+
+	column effect_size
+		dataType: double
+		formatString: 0.0000
+		lineageTag: bbcba4fb-d4e1-475a-9860-3f1ee5a2ea33
+		summarizeBy: none
+		sourceColumn: effect_size
+
+		annotation SummarizationSetBy = Automatic
+
+	column effect_size_metric
+		dataType: string
+		lineageTag: 5ecd4e4a-64ed-4f41-b564-7e87282ac3b5
+		summarizeBy: none
+		sourceColumn: effect_size_metric
+
+		annotation SummarizationSetBy = Automatic
+
+	column conclusion
+		dataType: string
+		lineageTag: 95cc1f5e-f33a-4658-ac51-666524a4af94
+		summarizeBy: none
+		sourceColumn: conclusion
+
+		annotation SummarizationSetBy = Automatic
+
+	partition StatTests = m
+		mode: import
+		source =
+				let
+					Source = Csv.Document(File.Contents(RepoRootPath & "\data\processed\statistical_test_results.csv"), [Delimiter=",", Encoding=1252, QuoteStyle=QuoteStyle.Csv]),
+					PromotedHeaders = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+					SelectedColumns = Table.SelectColumns(PromotedHeaders, {"test_name", "business_question", "statistic", "p_value", "significant_at_0.05", "effect_size", "effect_size_metric", "conclusion"}),
+					ChangedType = Table.TransformColumnTypes(SelectedColumns, {{"test_name", type text}, {"business_question", type text}, {"statistic", type number}, {"p_value", type number}, {"significant_at_0.05", type text}, {"effect_size", type number}, {"effect_size_metric", type text}, {"conclusion", type text}})
+				in
+					ChangedType
+
+	annotation PBI_ResultType = Table

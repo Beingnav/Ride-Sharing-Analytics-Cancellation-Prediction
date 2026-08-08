@@ -1,0 +1,32 @@
+table ShapImportance
+	lineageTag: 23a6db7c-11c1-4a1b-a4d6-d5347f6b4517
+
+	column feature
+		dataType: string
+		lineageTag: d93d6e85-32c3-43e7-b584-5e32b80c9e04
+		summarizeBy: none
+		sourceColumn: feature
+
+		annotation SummarizationSetBy = Automatic
+
+	column mean_abs_shap
+		dataType: double
+		formatString: 0.0000
+		lineageTag: 9d660ffa-047f-4167-89c6-707184c56938
+		summarizeBy: none
+		sourceColumn: mean_abs_shap
+
+		annotation SummarizationSetBy = Automatic
+
+	partition ShapImportance = m
+		mode: import
+		source =
+				let
+					Source = Csv.Document(File.Contents(RepoRootPath & "\data\processed\shap_feature_importance.csv"), [Delimiter=",", Encoding=1252, QuoteStyle=QuoteStyle.Csv]),
+					PromotedHeaders = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+					SelectedColumns = Table.SelectColumns(PromotedHeaders, {"feature", "mean_abs_shap"}),
+					ChangedType = Table.TransformColumnTypes(SelectedColumns, {{"feature", type text}, {"mean_abs_shap", type number}})
+				in
+					ChangedType
+
+	annotation PBI_ResultType = Table

@@ -1,0 +1,17 @@
+.venv/
+venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.DS_Store
+*.log
+.env
+
+# Power BI cache
+*.pbix.bak
+
+# Generated large artifacts are tracked intentionally for this portfolio project.
+# Uncomment below if you'd rather regenerate them from the notebooks instead of committing them.
+# data/raw/*.csv
+# data/processed/*.csv
+# models/*.pkl

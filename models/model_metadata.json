@@ -1,0 +1,11 @@
+{
+  "best_model_name": "Random Forest",
+  "model_filename": "cancellation_random_forest.pkl",
+  "is_linear_model": false,
+  "decision_threshold": 0.3,
+  "risk_tier_cuts": {
+    "low_max": 0.3,
+    "medium_max": 0.6
+  },
+  "xgboost_available_at_training_time": false
+}

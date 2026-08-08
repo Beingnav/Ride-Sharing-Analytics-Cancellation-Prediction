@@ -1,0 +1,68 @@
+table ModelComparison
+	lineageTag: 7dc34df7-10c4-4fbd-9bff-f0d831c53f75
+
+	column model
+		dataType: string
+		lineageTag: efd45aec-88e0-4151-bbe6-f2c27272bc08
+		summarizeBy: none
+		sourceColumn: model
+
+		annotation SummarizationSetBy = Automatic
+
+	column accuracy
+		dataType: double
+		formatString: 0.0%
+		lineageTag: bc3c0179-cf7b-4dac-9c66-77ad87e9ef7b
+		summarizeBy: none
+		sourceColumn: accuracy
+
+		annotation SummarizationSetBy = Automatic
+
+	column precision
+		dataType: double
+		formatString: 0.0%
+		lineageTag: 418c0e58-67c1-4b73-ba4b-53089920856c
+		summarizeBy: none
+		sourceColumn: precision
+
+		annotation SummarizationSetBy = Automatic
+
+	column recall
+		dataType: double
+		formatString: 0.0%
+		lineageTag: 32a200a5-2d24-4753-a871-1d87058f5ad3
+		summarizeBy: none
+		sourceColumn: recall
+
+		annotation SummarizationSetBy = Automatic
+
+	column f1_score
+		dataType: double
+		formatString: 0.000
+		lineageTag: e4c6dfe5-8212-44b1-837a-c43bb2e15671
+		summarizeBy: none
+		sourceColumn: f1_score
+
+		annotation SummarizationSetBy = Automatic
+
+	column roc_auc
+		dataType: double
+		formatString: 0.000
+		lineageTag: a9346b25-e72d-4c27-8328-978684b63938
+		summarizeBy: none
+		sourceColumn: roc_auc
+
+		annotation SummarizationSetBy = Automatic
+
+	partition ModelComparison = m
+		mode: import
+		source =
+				let
+					Source = Csv.Document(File.Contents(RepoRootPath & "\data\processed\model_comparison.csv"), [Delimiter=",", Encoding=1252, QuoteStyle=QuoteStyle.Csv]),
+					PromotedHeaders = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+					SelectedColumns = Table.SelectColumns(PromotedHeaders, {"model", "accuracy", "precision", "recall", "f1_score", "roc_auc"}),
+					ChangedType = Table.TransformColumnTypes(SelectedColumns, {{"model", type text}, {"accuracy", type number}, {"precision", type number}, {"recall", type number}, {"f1_score", type number}, {"roc_auc", type number}})
+				in
+					ChangedType
+
+	annotation PBI_ResultType = Table

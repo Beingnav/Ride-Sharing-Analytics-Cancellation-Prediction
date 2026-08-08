@@ -1,0 +1,3 @@
+relationship 84ca1f6a-7b85-46b1-a072-b5a22894ebb0
+	fromColumn: Predictions.trip_id
+	toColumn: Trips.trip_id

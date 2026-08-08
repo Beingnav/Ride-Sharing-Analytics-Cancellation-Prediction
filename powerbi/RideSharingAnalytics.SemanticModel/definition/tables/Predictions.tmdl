@@ -1,0 +1,102 @@
+table Predictions
+	lineageTag: 04c8e6c0-ae79-46f9-8004-6fecd516dccd
+
+	column trip_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 1d15786a-72a2-4aec-aba8-bb73b5f776a1
+		summarizeBy: none
+		sourceColumn: trip_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column rider_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 6fc2232b-deff-4659-9b16-1f181f727916
+		summarizeBy: none
+		sourceColumn: rider_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column driver_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 7caae549-0a49-44f8-9b0e-53f08c3ca07f
+		summarizeBy: none
+		sourceColumn: driver_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column request_datetime
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 2d194d77-32d4-4642-a93c-a8a4997790ea
+		summarizeBy: none
+		sourceColumn: request_datetime
+
+		annotation SummarizationSetBy = Automatic
+
+	column actual_cancelled
+		dataType: int64
+		formatString: 0
+		lineageTag: b20804a9-9c1a-41ac-9045-5e48b185c4c3
+		summarizeBy: none
+		sourceColumn: actual_cancelled
+
+		annotation SummarizationSetBy = Automatic
+
+	column predicted_cancel_probability
+		dataType: double
+		formatString: 0.0%
+		lineageTag: 96319341-93ef-4ab3-aa7b-23c603491782
+		summarizeBy: none
+		sourceColumn: predicted_cancel_probability
+
+		annotation SummarizationSetBy = Automatic
+
+	column predicted_cancelled
+		dataType: int64
+		formatString: 0
+		lineageTag: 4e8b2231-d718-45b2-aa91-48d044e313ac
+		summarizeBy: none
+		sourceColumn: predicted_cancelled
+
+		annotation SummarizationSetBy = Automatic
+
+	column risk_tier
+		dataType: string
+		lineageTag: 5da986d5-3455-443b-87df-bbf3c7c95ba1
+		summarizeBy: none
+		sourceColumn: risk_tier
+
+		annotation SummarizationSetBy = Automatic
+
+	column model_used
+		dataType: string
+		lineageTag: 8bfe90f8-912e-48d7-b431-586a21f60737
+		summarizeBy: none
+		sourceColumn: model_used
+
+		annotation SummarizationSetBy = Automatic
+
+	measure 'High Risk Trips' = CALCULATE(COUNTROWS(Predictions), Predictions[risk_tier] = "High")
+		formatString: #,0
+		lineageTag: 62e2ce49-63f9-4394-979a-812dbf491b58
+
+	measure 'Avg Cancellation Probability' = AVERAGE(Predictions[predicted_cancel_probability])
+		formatString: 0.0%
+		lineageTag: 61bee2ab-7c20-42b2-8976-512459cfed0f
+
+	partition Predictions = m
+		mode: import
+		source =
+				let
+					Source = Csv.Document(File.Contents(RepoRootPath & "\data\processed\cancellation_predictions.csv"), [Delimiter=",", Encoding=1252, QuoteStyle=QuoteStyle.Csv]),
+					PromotedHeaders = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+					SelectedColumns = Table.SelectColumns(PromotedHeaders, {"trip_id", "rider_id", "driver_id", "request_datetime", "actual_cancelled", "predicted_cancel_probability", "predicted_cancelled", "risk_tier", "model_used"}),
+					ChangedType = Table.TransformColumnTypes(SelectedColumns, {{"trip_id", Int64.Type}, {"rider_id", Int64.Type}, {"driver_id", Int64.Type}, {"request_datetime", type datetime}, {"actual_cancelled", Int64.Type}, {"predicted_cancel_probability", type number}, {"predicted_cancelled", Int64.Type}, {"risk_tier", type text}, {"model_used", type text}})
+				in
+					ChangedType
+
+	annotation PBI_ResultType = Table

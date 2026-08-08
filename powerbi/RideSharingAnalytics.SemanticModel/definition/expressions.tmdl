@@ -1,0 +1,6 @@
+expression RepoRootPath = "C:\Users\YourName\Ride-Sharing-Analytics-Cancellation-Prediction" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: c585a0d7-03d9-4c9a-8366-ef09cddf16af
+
+	annotation PBI_ResultType = Text
+
+	annotation PBI_NavigationStepName = Navigation

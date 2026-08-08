@@ -1,0 +1,42 @@
+{
+  "vehicle_type": [
+    "Auto",
+    "Bike",
+    "Economy",
+    "Premium",
+    "XL"
+  ],
+  "pickup_city": [
+    "Bangalore",
+    "Chennai",
+    "Delhi",
+    "Hyderabad",
+    "Mumbai",
+    "Pune"
+  ],
+  "drop_city": [
+    "Bangalore",
+    "Chennai",
+    "Delhi",
+    "Hyderabad",
+    "Mumbai",
+    "Pune"
+  ],
+  "payment_method": [
+    "Card",
+    "Cash",
+    "UPI",
+    "Wallet"
+  ],
+  "rider_gender": [
+    "Female",
+    "Male",
+    "Other"
+  ],
+  "preferred_payment": [
+    "Card",
+    "Cash",
+    "UPI",
+    "Wallet"
+  ]
+}

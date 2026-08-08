@@ -1,0 +1,8 @@
+test_name,business_question,statistic,p_value,significant_at_0.05,effect_size,effect_size_metric,conclusion
+Chi-Square Test of Independence,Does surge pricing associate with cancellation behavior?,839.6197,0.0,True,0.1366,Cramér's V,"Cancellation rate is 29.7% under high surge vs 17.5% otherwise — a statistically significant association (χ²=839.62, p=1.313e-184)."
+Welch's Independent T-Test,Does weekend demand differ significantly from weekday demand?,0.1656,0.868752,False,0.0219,Cohen's d,"Average daily trips: weekend=148.7, weekday=148.4 — not a statistically significant difference (t=0.17, p=0.8688, Cohen's d=0.02)."
+Pearson Correlation,Is trip distance associated with fare?,0.5848,0.0,True,0.5848,Pearson r,"Distance and fare are strongly correlated (r=0.585, p=0)."
+Pearson Correlation,Does trip duration influence fare?,0.5626,0.0,True,0.5626,Pearson r,"Duration and fare are strongly correlated (r=0.563, p=0)."
+Point-Biserial Correlation,Is driver rating associated with cancellation behavior?,-0.0756,0.0,True,-0.0756,Point-biserial r,"Driver rating and cancellation are significantly associated (r_pb=-0.076, p=4.469e-58); lower-rated drivers see more cancellations."
+Multiple Linear Regression,"How do distance, duration, surge and peak-hour jointly predict fare?",5665.9676,0.0,True,0.3896,R-squared,"Distance, duration, surge multiplier and peak-hour flag jointly explain 39.0% of fare variance (R²=0.390, F=5666.0, p=0)."
+95% Confidence Interval,What is the plausible range for true mean fare?,143.8409,,False,2.1814,CI width (Rs),"95% CI for mean fare: [Rs 142.75, Rs 144.93] (point estimate Rs 143.84)."
