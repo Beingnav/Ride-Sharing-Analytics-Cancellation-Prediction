@@ -16,6 +16,11 @@ that `python/01` through `python/06` already produced. If you haven't run
 those notebooks yet (or deleted `data/processed/` or `models/`), the app
 will tell you which file is missing on startup instead of crashing.
 
+## Demo
+
+[Watch a 35s walkthrough](demo.mp4) — all four Analytics Dashboard tabs
+plus the Cancellation Risk Predictor's "high-risk" scenario.
+
 ## Run it
 
 From the repo root, with the project's virtualenv active:

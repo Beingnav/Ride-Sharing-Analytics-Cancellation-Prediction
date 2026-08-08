@@ -595,6 +595,8 @@ http://localhost:8501
 
 Running locally at [http://localhost:8501](http://localhost:8501).
 
+📹 [Watch a 35s demo video](app/demo.mp4) of the Analytics Dashboard and Cancellation Risk Predictor.
+
 > The Streamlit application will be publicly deployed after final testing.
 
 ## 📖 Application Documentation
