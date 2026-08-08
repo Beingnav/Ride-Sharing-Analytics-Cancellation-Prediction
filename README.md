@@ -154,561 +154,537 @@ The project analyzes ride demand, revenue, cancellations, customer behavior, and
 
 ---
 
-# 🤖 Machine Learning Visualizations
+# 🤖 Machine Learning
 
-The machine-learning workflow evaluates classification performance and explains model predictions using SHAP.
+The machine-learning component predicts whether a requested ride is likely to be cancelled before the trip.
 
-### Model Comparison
+### Models Evaluated
 
-![Model Comparison](images/ml/model_comparison.png)
+- Logistic Regression
+- Random Forest
+- XGBoost
 
-### ROC Curves
+### Model Evaluation
 
-![ROC Curve](images/ml/roc_curve.png)
+Models are evaluated using:
 
-### Confusion Matrix
+- Accuracy
+- Precision
+- Recall
+- F1-Score
+- ROC-AUC
+- Confusion Matrix
 
-![Confusion Matrix](images/ml/confusion_matrix.png)
+### Current Model Performance
 
-### SHAP Feature Importance
+| Model | Accuracy | Precision | Recall | F1-Score | ROC-AUC |
+|---|---:|---:|---:|---:|---:|
+| 🥇 **Random Forest** | **80.4%** | **47.6%** | **23.7%** | **31.6%** | **0.677** |
+| Logistic Regression | 77.4% | 35.0% | 21.5% | 26.6% | 0.616 |
 
-![SHAP Feature Importance](images/ml/shap_feature_importance.png)
+### Best Current Model
 
-### SHAP Summary
+**Random Forest** currently provides the strongest F1-Score and ROC-AUC among the evaluated models.
 
-![SHAP Summary](images/ml/04_shap_summary.png)
+### 🔎 Explainable AI with SHAP
+
+SHAP (SHapley Additive exPlanations) is used to interpret the model's cancellation-risk predictions.
+
+The analysis helps identify which features contribute most to:
+
+- Increasing cancellation risk
+- Decreasing cancellation risk
+- Overall model predictions
+
+### Key Features
+
+| Rank | Feature |
+|---:|---|
+| 1 | `surge_multiplier` |
+| 2 | `distance_km` |
+| 3 | `driver_avg_rating` |
+| 4 | `driver_prior_cancel_rate` |
+| 5 | `is_peak_hour` |
+| 6 | `driver_experience_days` |
+| 7 | `request_hour` |
+
+### 📊 Model Evaluation Visualizations
+
+- [Model Comparison](images/ml/model_comparison.png)
+- [ROC Curve](images/ml/roc_curve.png)
+- [Confusion Matrix](images/ml/confusion_matrix.png)
+- [SHAP Feature Importance](images/ml/shap_feature_importance.png)
+- [SHAP Summary Plot](images/ml/04_shap_summary.png)
+- [SHAP Waterfall Example](images/ml/05_shap_waterfall_example.png)
 
 [📂 View all ML visualizations →](images/ml/)
 
 ---
-
-# 🤖 Machine Learning
-
-## Prediction Objective
-
-Predict whether a requested ride will be cancelled.
-
-```text
-0 → Completed
-1 → Cancelled
-```
-
-### Models Evaluated
-
-1. Logistic Regression
-2. Random Forest
-3. XGBoost
-
----
-
-## 📏 Model Performance
-
-The current evaluation uses a **time-based test split**.
-
-| Model                |  Accuracy | Precision |    Recall |  F1-Score |   ROC-AUC |
-| --------------------- | --------: | --------: | --------: | --------: | --------: |
-| 🥇 **Random Forest** | **80.4%** | **47.6%** | **23.7%** | **31.6%** | **0.677** |
-| Logistic Regression  |     77.4% |     35.0% |     21.5% |     26.6% |     0.616 |
-
-*(XGBoost joins this table automatically once trained — its macOS wheel needs `brew install libomp`, which wasn't installed in the environment this run came from.)*
-
-### Best Current Model
-
-**Random Forest** provides the strongest F1-score and ROC-AUC in the current evaluated run.
-
-> The results are reported from the actual model evaluation. No fabricated performance metrics are used.
-
----
-
-# ⚠️ Data Leakage Prevention
-
-A major focus of the project is preventing information from the future from entering the prediction model.
-
-The following outcome/post-trip fields are excluded:
-
-```text
-trip_status
-cancellation_reason
-post-trip ratings
-future rider behavior
-future driver behavior
-```
-
-Historical rider and driver features are calculated using information available **before the current trip**.
-
-The evaluation uses a **chronological train/test split** to better represent a real-world prediction scenario.
-
----
-
-# 🔎 Explainable AI — SHAP
-
-SHAP is used to understand which features influence cancellation predictions.
-
-## Top Predictive Features
-
-| Rank | Feature                    |
-| ---: | --------------------------- |
-|    1 | `surge_multiplier`         |
-|    2 | `distance_km`              |
-|    3 | `driver_avg_rating`        |
-|    4 | `driver_prior_cancel_rate` |
-|    5 | `is_peak_hour`             |
-|    6 | `driver_experience_days`   |
-|    7 | `request_hour`             |
-
-### Explainability Workflow
-
-```text
-Machine Learning Model
-        ↓
-    SHAP Explainer
-        ↓
-Feature Contributions
-        ↓
-Prediction Explanation
-        ↓
-Business Interpretation
-```
-
-This makes the model more useful for operations teams because predictions can be connected to understandable business factors.
-
----
-
-# 🚦 Cancellation Risk
-
-Predicted probabilities can be converted into operational risk categories:
-
-| Cancellation Probability | Risk      |
-| ------------------------: | --------- |
-|                  `< 30%` | 🟢 Low    |
-|              `30% – 60%` | 🟡 Medium |
-|                  `> 60%` | 🔴 High   |
-
-> These thresholds are configurable and should be calibrated using real business costs before production deployment.
-
----
-
-# 💰 Revenue Analytics
-
-The project analyzes:
-
-* Total revenue
-* Revenue by city
-* Revenue by driver
-* Revenue by vehicle type
-* Revenue by route
-* Average fare
-* Fare per kilometer
-* Monthly revenue
-* Month-over-month growth
-
----
-
-# 🚗 Operations Analytics
-
-Key operational metrics include:
-
-* Total trips
-* Completed trips
-* Cancelled trips
-* Cancellation rate
-* Trips by hour
-* Trips by day
-* Peak booking periods
-* City-level demand
-* Pickup locations
-* Drop locations
-* Driver performance
-* Vehicle performance
-* Payment methods
-
----
-
-# 👥 Customer Analytics
-
-Customer behavior is analyzed using:
-
-### Customer KPIs
-
-* Active Riders
-* New Riders
-* Returning Riders
-* Repeat Customer Rate
-* Monthly Retention
-* Trip Frequency
-* Customer Monetary Value
-* Historical Customer Value
-
----
-
-## 📌 RFM Segmentation
-
-Customers are analyzed using:
-
-```text
-Recency
-   +
-Frequency
-   +
-Monetary Value
-   ↓
-Customer Segment
-```
-
-### Segments
-
-```text
-⭐ VIP Customers
-💎 Loyal Customers
-👤 Regular Customers
-🆕 New Customers
-⚠️ At-Risk Customers
-```
-
-This can support targeted retention and customer engagement strategies.
-
----
-
 # 📊 Business Intelligence Dashboard
 
-The project includes a four-page business intelligence dashboard designed to help operations and management teams monitor ride-sharing performance.
+The project includes an interactive **Power BI dashboard** designed to convert ride-sharing data into actionable business insights.
 
-## 1️⃣ Executive Overview
-
-### Key KPIs
-
-- Total Trips
-- Total Revenue
-- Completed Trips
-- Cancellation Rate
-- Active Riders
-- Active Drivers
-- Average Fare
-- Average Rating
-
-### Business Questions
-
-- How is overall business performance?
-- Is revenue increasing or decreasing?
-- What is the current cancellation rate?
-- Which cities and vehicle types perform best?
+The dashboard is organized into four analytical pages covering business performance, operations, driver performance, and customer cancellation risk.
 
 ---
 
-## 2️⃣ Demand & Operations
+## 📌 Dashboard Pages
 
-### Analysis
+### 1️⃣ Executive Overview
 
-- Demand by hour
-- Demand by day
-- Peak booking periods
-- City-level demand
-- Pickup locations
-- Drop locations
-- Cancellation reasons
-- Surge pricing patterns
+Provides a high-level view of overall ride-sharing performance.
 
-### Business Questions
+**Key KPIs:**
 
-- When should additional drivers be available?
-- Which cities experience the highest demand?
-- When are cancellation rates highest?
+- 🚗 Total Trips
+- 💰 Total Revenue
+- ✅ Completed Trips
+- ❌ Cancellation Rate
+- 👥 Active Riders
+- 👨‍✈️ Active Drivers
+- ⭐ Average Driver Rating
+- 💵 Average Fare
 
----
+**Key Analysis:**
 
-## 3️⃣ Driver Performance
-
-### Analysis
-
-- Driver revenue ranking
-- Trips per driver
-- Driver cancellation rate
-- Driver ratings
+- Overall business performance
+- Revenue trends
+- Trip volume
+- Completion vs cancellation
+- City-level performance
 - Vehicle-type performance
-- Driver performance comparison
 
-### Business Questions
+---
+
+### 2️⃣ Demand & Operations
+
+Analyzes ride demand and operational patterns.
+
+**Key Analysis:**
+
+- 📈 Trips by hour
+- 📅 Trips by day
+- 🏙️ Demand by city
+- 📍 Pickup and drop locations
+- 🚗 Vehicle-type demand
+- ⚡ Peak-hour demand
+- ❌ Cancellation patterns
+- 📈 Surge pricing behavior
+
+**Business Questions:**
+
+- When is demand highest?
+- Which cities generate the most trips?
+- When should additional drivers be available?
+- Which periods experience higher cancellation rates?
+
+---
+
+### 3️⃣ Driver Performance
+
+Evaluates driver productivity, ratings, revenue contribution, and cancellation behavior.
+
+**Key Metrics:**
+
+- 👨‍✈️ Trips per driver
+- 💰 Revenue per driver
+- ⭐ Driver rating
+- ❌ Driver cancellation rate
+- 🏆 Top-performing drivers
+- 🚘 Vehicle performance
+
+**Business Questions:**
 
 - Which drivers generate the most revenue?
 - Which drivers have higher cancellation rates?
+- Which drivers have stronger ratings?
 - Which vehicle types perform best?
 
 ---
 
-## 4️⃣ Customer & Cancellation Risk
+### 4️⃣ Customer & Cancellation Risk
 
-### Analysis
+Focuses on customer behavior, retention, segmentation, and cancellation prediction.
 
-- Active customers
-- New vs returning customers
-- Customer retention
-- RFM segmentation
-- Customer value
-- Cancellation probability
-- High-risk trips
-- SHAP feature importance
+**Key Analysis:**
 
-### Business Questions
+- 👥 Customer segmentation
+- 🔄 Customer retention
+- 💰 Customer value
+- 🚦 Cancellation probability
+- ❌ High-risk rides
+- 🔎 SHAP feature importance
+- 📊 Cancellation drivers
+
+**Business Questions:**
 
 - Which customers are most valuable?
-- Which customers may need retention efforts?
-- Which trips have the highest cancellation risk?
+- Which customers may be at risk of churn?
+- Which rides have a high cancellation probability?
 - What factors contribute to cancellation risk?
 
 ---
 
-## 💡 Business Insights
-
-The analysis can support decisions in five major areas:
-
-### 🚗 Demand Optimization
-
-Use hourly, daily, and city-level demand patterns to improve driver allocation during peak periods.
-
-### ❌ Cancellation Reduction
-
-Use cancellation-risk predictions to identify potentially high-risk trips before operational issues occur.
-
-### 💰 Revenue Optimization
-
-Compare cities, routes, drivers, and vehicle types to identify stronger revenue opportunities.
-
-### 👨‍✈️ Driver Operations
-
-Monitor driver performance, ratings, utilization, and historical cancellation behavior.
-
-### 👥 Customer Retention
-
-Use customer segmentation and retention metrics to identify valuable and at-risk customers.
-
----
-
-## 🖥️ Dashboard Preview
-
-> The current PNG dashboard previews are generated from the project data. They are not screenshots of Power BI Desktop.
+# 🖥️ Dashboard Preview
 
 ### Executive Overview
 
 ![Executive Overview](dashboard/01_executive_overview.png)
 
+---
+
 ### Demand & Operations
 
 ![Demand & Operations](dashboard/02_demand_operations.png)
+
+---
 
 ### Driver Performance
 
 ![Driver Performance](dashboard/03_driver_performance.png)
 
+---
+
 ### Customer & Cancellation Risk
 
 ![Customer & Cancellation Risk](dashboard/04_customer_cancellation_risk.png)
 
-[📂 View dashboard assets →](dashboard/)
+---
+
+## 🎛️ Interactive Filters
+
+The dashboard supports interactive filtering across key business dimensions, including:
+
+- 📅 Date
+- 🏙️ City
+- 🚘 Vehicle Type
+- 💳 Payment Method
+- ⚡ Surge Multiplier
+- 🚦 Trip Status
+
+These filters allow users to drill down from overall business performance into specific customer, driver, city, and cancellation patterns.
 
 ---
+
+## 💡 Dashboard Insights
+
+The dashboard helps stakeholders:
+
+- Identify peak demand periods
+- Monitor cancellation trends
+- Compare city-level performance
+- Evaluate driver performance
+- Analyze customer behavior
+- Identify high-risk rides
+- Understand cancellation drivers
+- Support data-driven operational decisions
+
+---
+
+[📂 View Dashboard Assets →](dashboard/)
+
+### 🔗 Dashboard Resources
+
+| Resource | Description |
+|---|---|
+| 📊 Power BI Dashboard | Interactive business intelligence dashboard |
+| 🖼️ Dashboard Images | Static dashboard previews |
+| 📁 Dashboard Folder | All dashboard-related assets |
+| 📖 Dashboard Documentation | Dashboard design and KPI documentation |
+
+### 🧰 Dashboard Technology
+
+- **Power BI** — interactive business intelligence and reporting
+- **DAX** — calculated measures and KPI logic
+- **Power Query** — data transformation and preparation
+- **Excel / CSV** — source data and supporting analysis
+
+### 🎨 Dashboard Design Principles
+
+The dashboard follows a business-focused design approach:
+
+- Clear KPI cards for executive-level metrics
+- Consistent visual hierarchy
+- Interactive slicers and filters
+- Minimal visual clutter
+- Business-oriented chart titles
+- Drill-down analysis where applicable
+- Consistent metric definitions across pages
+- Focus on actionable insights rather than decorative visuals
+
+### 💼 Business Value
+
+The dashboard converts raw ride-sharing data into decision-ready insights for:
+
+- 📈 **Demand Planning** — identify peak periods and high-demand locations
+- 🚗 **Driver Operations** — monitor driver productivity and performance
+- ❌ **Cancellation Management** — identify patterns and high-risk rides
+- 💰 **Revenue Optimization** — analyze revenue across cities, routes, and vehicle types
+- 👥 **Customer Retention** — understand customer behavior and value
+- 🎯 **Operational Decision-Making** — support data-driven business strategies
+
+### 📌 Dashboard Summary
+
+The Power BI dashboard brings together **operational, revenue, driver, customer, and cancellation analytics** into a single decision-support layer.
+
+It enables stakeholders to move from:
+
+**Raw Data → KPIs → Trends → Root Causes → Business Actions**
+
 
 # 🚀 Streamlit Application
 
-The repository includes a Streamlit application for interactive exploration.
+The Streamlit application brings the project's analytics and machine-learning workflow into an interactive interface.
 
-### Features
+## 📊 Analytics Dashboard
 
-* 📊 Executive analytics
-* 🚗 Demand analysis
-* 👨‍✈️ Driver performance
-* 👥 Customer analytics
-* ❌ Cancellation-risk prediction
-* 🔎 SHAP explanations
+The dashboard provides interactive views across four major business areas:
 
-### Run Locally
+- 📌 **Executive Overview**
+- 🚗 **Demand & Operations**
+- 👨‍✈️ **Driver Performance**
+- 👥 **Customer & Cancellation Risk**
+
+## 🤖 Cancellation Risk Predictor
+
+The application estimates the probability that a ride will be cancelled before the trip.
+
+### Prediction Inputs
+- Vehicle type
+- Pickup and drop locations
+- Trip distance
+- Surge multiplier
+- Payment method
+- Request date and time
+- Rider historical behavior
+- Driver rating
+- Driver experience
+- Driver historical cancellation behavior
+
+### Prediction Output
+The application provides:
+
+- 🎯 Cancellation probability
+- 🚦 Risk category
+- 📊 Risk gauge
+- 🔎 Feature contributions
+- 🧠 SHAP-based prediction explanation
+
+### 🔎 Explainable AI with SHAP
+
+SHAP is used to explain individual cancellation-risk predictions.
+
+The application shows which features contribute to increasing or decreasing the predicted cancellation risk, making the model easier to interpret from a business perspective.
+
+---
+
+## ▶️ Run Locally
+
+Create and activate a virtual environment:
+
+python3 -m venv .venv
+source .venv/bin/activate
+
+Install the project dependencies:
 
 ```bash
 pip install -r requirements.txt
-streamlit run app/streamlit_app.py
 ```
 
-### 🌐 Public Demo
+Run the Streamlit application:
+
+```bash 
+streamlit run app/streamlit_app.py 
+```
+The application will normally be available at:
+
+```text 
+http://localhost:8501
+```
+---
+
+## 🌐 Live Demo
 
 **Coming soon**
 
-> Replace this section with the actual Streamlit URL after deployment. Do not label a localhost application as a live demo.
+> The Streamlit application will be publicly deployed after final testing.
+
+## 📖 Application Documentation
+
+For detailed application architecture, dependencies, and setup instructions:
+
+[View Streamlit App Documentation →](app/README.md) 
 
 ---
 
-# 🗄️ Data Model
+# 🗄️ SQL Analysis
 
-The project uses a relational structure containing:
+The SQL layer transforms the ride-sharing database into business-ready data and actionable insights.
 
-```text
-Riders
-Drivers
-Vehicles
-Locations
-Trips
-Payments
-Ratings
-```
-
-### Relationships
-
-```text
-Riders       1 ─────── * Trips
-Drivers      1 ─────── * Trips
-Drivers      1 ─────── 1 Vehicles
-Locations    1 ─────── * Trips
-Trips        1 ─────── * Payments
-Trips        1 ─────── * Ratings
-```
-
----
-
-# 🧠 SQL Analysis
-
-The SQL layer demonstrates real-world analytical SQL.
+SQL is used for data exploration, KPI development, customer analysis, operational analysis, revenue analysis, cancellation analysis, and advanced analytical queries.
 
 ### SQL Concepts
 
-```text
-SELECT
-JOINs
-GROUP BY
-HAVING
-CASE WHEN
-Subqueries
-CTEs
-Window Functions
-RANK()
-DENSE_RANK()
-ROW_NUMBER()
-LAG()
-NTILE()
-Date Functions
-Views
-Indexes
-Aggregate Functions
-```
+- SELECT and filtering
+- JOINs
+- GROUP BY
+- HAVING
+- CASE WHEN
+- Subqueries
+- Common Table Expressions (CTEs)
+- Window Functions
+- RANK()
+- DENSE_RANK()
+- ROW_NUMBER()
+- LAG()
+- NTILE()
+- Date & Time Functions
+- Aggregate Functions
+- Views
+- Indexes
 
-### SQL Modules
+### 📂 SQL Analysis Modules
 
-| File                           | Purpose                  |
-| --------------------------------- | -------------------------- |
-| `01_create_database.sql`       | Create database          |
-| `02_create_tables.sql`         | Create relational schema |
-| `03_load_data.sql`             | Load data                |
-| `04_basic_analysis.sql`        | Basic analysis           |
-| `05_advanced_analysis.sql`     | Advanced SQL              |
-| `06_business_kpis.sql`         | Business KPIs            |
-| `07_customer_retention.sql`    | Retention analysis       |
-| `08_customer_segmentation.sql` | RFM segmentation         |
-
+| File | Purpose |
+|---|---|
+| `01_create_database.sql` | Create the project database |
+| `02_create_tables.sql` | Create relational tables and relationships |
+| `03_load_data.sql` | Load data into the database |
+| `04_basic_analysis.sql` | Basic business and operational analysis |
+| `05_advanced_analysis.sql` | Advanced SQL analysis |
+| `06_business_kpis.sql` | Calculate business KPIs |
+| `07_customer_retention.sql` | Analyze customer retention |
+| `08_customer_segmentation.sql` | Perform customer segmentation |
 ---
 
-# 🐍 Python & EDA
+# 🐍 Python & Data Analysis
 
-Python is used for:
+Python is used for data cleaning, exploratory data analysis, statistical analysis, feature engineering, machine learning, and model explainability.
 
-### Data Cleaning
+### Python Workflow
 
-* Missing-value analysis
-* Duplicate detection
-* Data validation
-* Data-type validation
-* Outlier analysis
-
-### Exploratory Data Analysis
-
-* Demand trends
-* Revenue distribution
-* Cancellation behavior
-* Customer behavior
-* Driver performance
-* Vehicle performance
-* City performance
-* Pricing patterns
-
-### Libraries
+Run the notebooks in the following order:
 
 ```text
-Pandas
-NumPy
-Matplotlib
-Seaborn
-Plotly
+01_data_generation.ipynb
+        ↓
+02_data_cleaning.ipynb
+        ↓
+03_eda.ipynb
+        ↓
+04_statistical_analysis.ipynb
+        ↓
+05_feature_engineering.ipynb
+        ↓
+06_cancellation_prediction.ipynb
+        ↓
+07_model_explainability.ipynb
 ```
+### Python Libraries
+
+- **Pandas** — data manipulation and analysis
+- **NumPy** — numerical computing
+- **Matplotlib** — data visualization
+- **Seaborn** — statistical visualization
+- **Plotly** — interactive visualization
+- **SciPy** — statistical testing
+- **Statsmodels** — statistical modeling
+- **Scikit-learn** — machine learning
+- **XGBoost** — gradient boosting
+- **SHAP** — model explainability
+- **Joblib** — model serialization
 
 ---
 
 # 📈 Statistical Analysis
 
-Statistical techniques include:
+The project uses statistical methods to investigate relationships and differences in ride-sharing behavior.
 
-* Chi-Square Test
-* Welch's T-Test
-* Pearson Correlation
-* Regression Analysis
-* Confidence Intervals
-* Effect Size
+### Statistical Techniques
+
+- **Chi-Square Test** — tests associations between categorical variables
+- **Welch's T-Test** — compares means between two groups
+- **Pearson Correlation** — measures linear relationships between numerical variables
+- **Regression Analysis** — analyzes relationships between predictors and outcomes
+- **Confidence Intervals** — quantifies uncertainty around estimates
+- **Effect Size** — measures the practical magnitude of observed differences
 
 ### Example Hypothesis
 
-**H₀:** Surge pricing has no association with cancellation behavior.
+**H₀ (Null Hypothesis):** Surge pricing has no association with cancellation behavior.
 
-**H₁:** Surge pricing is associated with cancellation behavior.
+**H₁ (Alternative Hypothesis):** Surge pricing is associated with cancellation behavior.
 
-Statistical significance:
+The analysis uses:
 
 ```text
-α = 0.05
+Significance level (α) = 0.05
 ```
 
 ---
 
-# 🏗️ End-to-End Architecture
+# ⚠️ Data Leakage Prevention
+
+Data leakage was considered during model development to ensure that information from the outcome or future does not enter the prediction process.
+
+The following post-outcome variables are excluded from predictive modeling:
+
+- `trip_status`
+- `cancellation_reason`
+- Post-trip ratings
+- Future rider behavior
+- Future driver behavior
+
+Historical rider and driver features are calculated using information available before the current trip.
+
+The model evaluation uses a **time-based train/test split** to better represent a real-world prediction scenario.
+
+---
+
+# 🏗️ Project Architecture
+
+The project follows an end-to-end analytics and machine-learning workflow:
 
 ```text
-                    RAW DATA
-                       │
-                       ▼
-              ┌─────────────────┐
-              │      MySQL      │
-              │ Relational Data │
-              └────────┬────────┘
-                       │
-             ┌─────────┴─────────┐
-             ▼                   ▼
-       SQL Analytics        Python / Pandas
-             │                   │
-             │                   ▼
-             │                  EDA
-             │                   │
-             │                   ▼
-             │           Statistical Tests
-             │                   │
-             └─────────┬─────────┘
-                       ▼
-              Feature Engineering
-                       │
-                       ▼
-              Machine Learning
-                       │
-              ┌────────┴────────┐
-              ▼                 ▼
-        Random Forest        XGBoost
-              │                 │
-              └────────┬────────┘
-                       ▼
-                     SHAP
-                       │
-                       ▼
-              Cancellation Risk
-                       │
-             ┌─────────┴─────────┐
-             ▼                   ▼
-          Power BI           Streamlit
-             │                   │
-             └─────────┬─────────┘
-                       ▼
-                BUSINESS INSIGHTS
+Raw Data
+   │
+   ▼
+MySQL Database
+   │
+   ├──────────────► SQL Business Analysis
+   │
+   ▼
+Python Data Pipeline
+   │
+   ├──────────────► Data Cleaning
+   │
+   ├──────────────► Exploratory Data Analysis
+   │
+   └──────────────► Statistical Analysis
+                          │
+                          ▼
+                  Feature Engineering
+                          │
+                          ▼
+                  Machine Learning
+                    │           │
+                    ▼           ▼
+              Random Forest   XGBoost
+                    │           │
+                    └─────┬─────┘
+                          ▼
+                         SHAP
+                          │
+                          ▼
+                 Cancellation Risk
+                          │
+                 ┌────────┴────────┐
+                 ▼                 ▼
+              Power BI         Streamlit
+                 │                 │
+                 └────────┬────────┘
+                          ▼
+                  Business Insights
 ```
 
 ---
@@ -718,34 +694,30 @@ Statistical significance:
 ```text
 Ride-Sharing-Analytics-Cancellation-Prediction/
 │
-├── 📁 app/
+├── app/
 │   ├── streamlit_app.py
 │   └── README.md
 │
-├── 📁 dashboard/
+├── dashboard/
 │   ├── 01_executive_overview.png
 │   ├── 02_demand_operations.png
 │   ├── 03_driver_performance.png
 │   ├── 04_customer_cancellation_risk.png
-│   └── generate_previews.py
+│   └── README.md
 │
-├── 📁 data/
+├── data/
 │   ├── raw/
 │   └── processed/
 │
-├── 📁 images/
+├── images/
 │   ├── eda/
 │   └── ml/
 │
-├── 📁 models/
+├── models/
 │
-├── 📁 powerbi/
-│   ├── RideSharingAnalytics.pbip
-│   ├── RideSharingAnalytics.SemanticModel/
-│   ├── RideSharingAnalytics.Report/
-│   └── README.md
+├── powerbi/
 │
-├── 📁 python/
+├── python/
 │   ├── 01_data_generation.ipynb
 │   ├── 02_data_cleaning.ipynb
 │   ├── 03_eda.ipynb
@@ -754,9 +726,9 @@ Ride-Sharing-Analytics-Cancellation-Prediction/
 │   ├── 06_cancellation_prediction.ipynb
 │   └── 07_model_explainability.ipynb
 │
-├── 📁 reports/
+├── reports/
 │
-├── 📁 sql/
+├── sql/
 │   ├── 01_create_database.sql
 │   ├── 02_create_tables.sql
 │   ├── 03_load_data.sql
@@ -766,30 +738,24 @@ Ride-Sharing-Analytics-Cancellation-Prediction/
 │   ├── 07_customer_retention.sql
 │   └── 08_customer_segmentation.sql
 │
-├── 📄 .gitignore
-├── 📄 CONTRIBUTING.md
-├── 📄 LICENSE
-├── 📄 README.md
-└── 📄 requirements.txt
+├── .gitignore
+├── CONTRIBUTING.md
+├── LICENSE
+├── README.md
+└── requirements.txt
 ```
 
 ---
 
-# 🚀 Installation
+# 🚀 Installation & Setup
 
-## 1. Clone Repository
+## 1️⃣ Clone the Repository
 
 ```bash
 git clone https://github.com/Beingnav/Ride-Sharing-Analytics-Cancellation-Prediction.git
-```
-
-```bash
 cd Ride-Sharing-Analytics-Cancellation-Prediction
 ```
-
----
-
-## 2. Create Virtual Environment
+## 2️⃣ Create a Virtual Environment
 
 ### macOS / Linux
 
@@ -797,27 +763,23 @@ cd Ride-Sharing-Analytics-Cancellation-Prediction
 python3 -m venv .venv
 source .venv/bin/activate
 ```
-
-### Windows
+### windows
 
 ```bash
 python -m venv .venv
 .venv\Scripts\activate
 ```
 
----
-
-## 3. Install Dependencies
+## 3️⃣ Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
-
 ---
 
-# 🗄️ MySQL Setup
+## 🗄️ MySQL Setup
 
-Execute the SQL files in this order:
+Run the SQL files in the following order:
 
 ```text
 01_create_database.sql
@@ -836,12 +798,11 @@ Execute the SQL files in this order:
         ↓
 08_customer_segmentation.sql
 ```
-
 ---
 
-# 🐍 Python Workflow
+## 🐍 Python Workflow
 
-Run the notebooks sequentially:
+Run the notebooks in the following order:
 
 ```text
 01_data_generation.ipynb
@@ -858,195 +819,47 @@ Run the notebooks sequentially:
         ↓
 07_model_explainability.ipynb
 ```
-
 ---
 
-# 📊 Core KPIs
+## 🚀 Run the Streamlit App
 
-```text
-Total Trips
-Completed Trips
-Cancelled Trips
-Cancellation Rate
-Total Revenue
-Average Fare
-Average Distance
-Average Duration
-Fare per Kilometer
-Active Riders
-Active Drivers
-Trips per Rider
-Trips per Driver
-Revenue per Driver
-Revenue by City
-Revenue by Vehicle Type
-Revenue by Route
-Peak Booking Hour
-Peak Booking Day
-Repeat Customer Rate
-Retention Rate
-Customer Value
-High-Risk Trips
+From the repository root:
+
+```bash
+streamlit run app/streamlit_app.py
 ```
-
----
-
-# 💡 Business Recommendations
-
-The analysis framework can support:
-
-### 🚗 Demand Optimization
-
-Improve driver allocation during high-demand periods and locations.
-
-### ❌ Cancellation Reduction
-
-Identify high-risk bookings and investigate pricing, driver availability, pickup time, and demand conditions.
-
-### 💰 Revenue Optimization
-
-Focus on high-performing cities, routes, vehicle types, and customer segments.
-
-### 👨‍✈️ Driver Operations
-
-Monitor driver utilization, ratings, performance, and historical cancellation behavior.
-
-### 👥 Customer Retention
-
-Use RFM segmentation to create targeted retention strategies.
-
 ---
 
 # ⚠️ Limitations
 
-This project uses synthetic data.
+This project uses synthetic ride-sharing data created for portfolio and educational purposes.
 
 Therefore:
 
-* Results should not be interpreted as actual industry statistics.
-* Model performance depends on the synthetic data-generating process.
-* Production deployment requires real operational data.
-* Risk thresholds require calibration using actual business costs.
-* Production models require monitoring for data drift and concept drift.
+- Results should not be interpreted as actual industry statistics.
+- Model performance depends on the synthetic data-generating process.
+- Production deployment would require real-world operational data.
+- Cancellation-risk thresholds should be calibrated using actual business costs.
+- Production models would require monitoring for data drift and concept drift.
+- Additional validation would be required before using predictions for operational decisions.
 
 ---
 
 # 🔮 Future Scope
 
-* Demand forecasting
-* Customer churn prediction
-* Driver supply forecasting
-* Geospatial analytics
-* Dynamic pricing optimization
-* Real-time cancellation prediction
-* FastAPI deployment
-* Streamlit Cloud deployment
-* Cloud database integration
-* Automated model retraining
-* Model monitoring
-* Real-time analytics
+Potential future improvements include:
 
----
-
-# 🧠 Skills Demonstrated
-
-### Data Analytics
-
-* Data Cleaning
-* Exploratory Data Analysis
-* KPI Development
-* Business Analysis
-* Data Visualization
-
-### SQL
-
-* Joins
-* Aggregations
-* CTEs
-* Subqueries
-* Window Functions
-* Ranking
-* Views
-* Indexes
-* Date Functions
-
-### Python
-
-* Pandas
-* NumPy
-* Matplotlib
-* Seaborn
-* Plotly
-
-### Statistics
-
-* Hypothesis Testing
-* Chi-Square
-* T-Test
-* Correlation
-* Regression
-* Confidence Intervals
-* Effect Size
-
-### Machine Learning
-
-* Classification
-* Logistic Regression
-* Random Forest
-* XGBoost
-* Feature Engineering
-* Model Evaluation
-* Time-Based Validation
-* Data Leakage Prevention
-
-### Explainable AI
-
-* SHAP
-* Feature Importance
-* Prediction Explanation
-
-### Business Intelligence
-
-* Power BI
-* DAX
-* Data Modeling
-* Interactive Dashboards
-* KPI Design
-
----
-
-# 📌 Project Status
-
-| Component            | Status                                            |
-| --------------------- | -------------------------------------------------- |
-| MySQL Database       | ✅ Complete                                        |
-| SQL Analysis         | ✅ Complete                                        |
-| Python EDA           | ✅ Complete                                        |
-| Statistical Analysis | ✅ Complete                                        |
-| Feature Engineering  | ✅ Complete                                        |
-| ML Pipeline          | ✅ Complete                                        |
-| SHAP Analysis        | ✅ Complete                                        |
-| Power BI             | 🟡 `.pbip` + preview mockups ready; verified `.pbix` pending (Windows-only tool) |
-| Streamlit App        | 🟡 Local application ready                        |
-| Public Demo          | 🔴 Not deployed                                   |
-
----
-
-# 🔮 Next Development Milestones
-
-```text
-[✓] SQL Analytics
-[✓] Python EDA
-[✓] Statistical Analysis
-[✓] Feature Engineering
-[✓] Machine Learning
-[✓] SHAP Explainability
-[✓] Dashboard Preview Screenshots
-[ ] Verified Power BI .pbix (requires Windows + Power BI Desktop)
-[ ] Streamlit Deployment
-[ ] Public Demo
-[ ] Final Case Study
-```
+- 📈 Demand forecasting
+- 👥 Customer churn prediction
+- 👨‍✈️ Driver supply forecasting
+- 🗺️ Geospatial and location-based analysis
+- 💰 Dynamic pricing optimization
+- ⚡ Real-time cancellation-risk prediction
+- 🚀 FastAPI model deployment
+- ☁️ Cloud database integration
+- 🔄 Automated model retraining
+- 📊 Model monitoring and drift detection
+- ⚡ Real-time analytics
 
 ---
 
@@ -1058,7 +871,7 @@ Therefore:
 
 ### Core Skills
 
-**SQL · Python · Power BI · Excel · Statistics · Machine Learning · Data Visualization**
+**SQL • Python • Power BI • Excel • Statistics • Machine Learning • Data Visualization**
 
 ### GitHub
 
@@ -1072,10 +885,10 @@ https://www.linkedin.com/in/navdeep-taliyan-7270a824/
 
 # ⭐ Support
 
-If you find this project useful, consider giving the repository a ⭐.
+If you find this project useful, consider giving the repository a ⭐ on GitHub.
 
 ---
 
-## 📄 License
+# 📄 License
 
-This project is licensed under the **MIT License**.
+This project is licensed under the MIT License.
