@@ -47,20 +47,53 @@ The project combines **MySQL, Python, Statistics, Machine Learning, SHAP, Power 
 ---
 
 # 🎯 Business Problem
+Ride-sharing platforms need to balance **customer demand, driver availability, revenue, cancellations, customer satisfaction, and operational efficiency**.
 
-Ride-sharing companies need to answer questions such as:
+This project analyzes ride-sharing operations and customer behavior to identify patterns that can support better business decisions.
 
-* When is demand highest?
-* Where are cancellation hotspots?
-* Which cities generate the most revenue?
-* Which drivers perform best?
-* Which vehicle types are most profitable?
-* Which customers are most valuable?
-* What factors influence cancellations?
-* Can cancellation risk be predicted before a trip?
-* How can operations teams reduce cancellations?
+## Key Business Questions
 
-This project addresses these questions using both **descriptive analytics and predictive modeling**.
+- 🚗 When is ride demand highest?
+- 📍 Which cities and routes generate the most demand?
+- 💰 Which cities, routes, drivers, and vehicle types generate the most revenue?
+- ❌ What factors are associated with ride cancellations?
+- 📈 How does surge pricing relate to cancellation behavior?
+- 👨‍✈️ Which drivers demonstrate the strongest performance?
+- 👥 Which customers are most valuable?
+- 🔄 What is the repeat customer and retention rate?
+- 🤖 Can cancellation risk be predicted before a trip?
+- 🔎 Which features contribute most to cancellation risk?
+
+## 🎯 Project Objectives
+
+### 📊 Operations Analytics
+- Analyze ride demand by hour, day, and city
+- Identify peak booking periods
+- Analyze pickup and drop locations
+- Evaluate driver and vehicle performance
+
+### 💰 Revenue Analytics
+- Calculate total and average revenue
+- Analyze revenue by city, driver, vehicle, and route
+- Calculate average fare and fare per kilometer
+
+### 👥 Customer Analytics
+- Analyze active and returning riders
+- Measure customer retention
+- Perform RFM-style customer segmentation
+- Identify valuable and at-risk customers
+
+### ❌ Cancellation Analytics
+- Calculate cancellation rate
+- Analyze cancellation reasons
+- Identify cancellation patterns
+- Investigate the relationship between surge pricing and cancellations
+
+### 🤖 Predictive Analytics
+- Build cancellation prediction models
+- Compare classification algorithms
+- Evaluate model performance
+- Explain predictions using SHAP
 
 ---
 
