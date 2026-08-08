@@ -1,33 +1,48 @@
 # 🚖 Ride-Sharing Analytics & Cancellation Prediction
 
-### End-to-End Data Analytics & Machine Learning Portfolio Project
+### End-to-End Data Analytics & Machine Learning Project
 
-**SQL · Python · Statistics · Machine Learning · SHAP · Power BI · Streamlit**
+**SQL • Python • Statistics • Machine Learning • SHAP • Power BI • Streamlit**
 
-[📊 SQL Analysis](sql/) · [🐍 Python Notebooks](python/) · [🤖 ML Pipeline](python/06_cancellation_prediction.ipynb) · [🔎 SHAP Analysis](python/07_model_explainability.ipynb)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python)](https://www.python.org/)
+[![MySQL](https://img.shields.io/badge/MySQL-8.0-orange?logo=mysql)](https://www.mysql.com/)
+[![Power BI](https://img.shields.io/badge/Power%20BI-Dashboard-yellow?logo=powerbi)](https://powerbi.microsoft.com/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-App-red?logo=streamlit)](https://streamlit.io/)
+[![Scikit--learn](https://img.shields.io/badge/Scikit--learn-Machine%20Learning-F7931E?logo=scikit-learn)](https://scikit-learn.org/)
+[![SHAP](https://img.shields.io/badge/SHAP-Explainable%20AI-purple)](https://shap.readthedocs.io/)
 
 ---
 
-## 📌 Executive Summary
+## 📌 Project Overview
 
-Ride-sharing platforms need to balance **customer demand, driver availability, revenue, customer retention, and trip cancellations**.
+An end-to-end ride-sharing analytics and machine learning project focused on:
 
-This project builds an end-to-end analytics and machine learning solution to understand ride-sharing operations and identify factors associated with cancellation behavior.
+- 🚗 Ride demand and operational performance
+- 💰 Revenue and pricing analysis
+- 👥 Customer behavior and retention
+- ❌ Cancellation analysis
+- 🤖 Cancellation-risk prediction
+- 🔎 Explainable AI using SHAP
+- 📊 Business intelligence dashboards
 
-The project combines:
-
-* 🗄️ MySQL
-* 🐍 Python
-* 📊 Exploratory Data Analysis
-* 📈 Statistical Analysis
-* 🤖 Machine Learning
-* 🔎 SHAP Explainable AI
-* 📊 Power BI
-* 🚀 Streamlit
-
-The workflow transforms raw trip data into **business KPIs, customer segments, operational insights, and cancellation-risk predictions**.
+The project combines **MySQL, Python, Statistics, Machine Learning, SHAP, Power BI, and Streamlit** to transform ride-sharing data into actionable business insights.
 
 > **Dataset:** Synthetic data created for portfolio and educational purposes. This project is not affiliated with Uber, Ola, Lyft, Rapido, or any other ride-sharing company.
+
+---
+
+## 🔗 Project Navigation
+
+| Component | Description |
+|---|---|
+| 🗄️ [SQL](sql/) | Database design and business analysis |
+| 🐍 [Python](python/) | Data cleaning, EDA, statistics and ML |
+| 🤖 [Models](models/) | Trained model and preprocessing artifacts |
+| 🔎 [ML Visualizations](images/ml/) | Model evaluation and SHAP results |
+| 📊 [Dashboard](dashboard/) | Business dashboard previews |
+| 📈 [Power BI](powerbi/) | Power BI project and dashboard documentation |
+| 🚀 [Streamlit App](app/) | Interactive analytics and prediction application |
+| 📄 [Reports](reports/) | Project documentation and reports |
 
 ---
 
