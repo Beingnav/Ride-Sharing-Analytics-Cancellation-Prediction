@@ -52,6 +52,73 @@ The workflow transforms raw ride-sharing data into:
 
 ---
 
+## 📂 Dataset
+
+The project uses a synthetic relational ride-sharing dataset designed to simulate a production-style ride-booking environment.
+
+### Core Entities
+
+| Entity | Description |
+|---|---|
+| `riders` | Customer and rider information |
+| `drivers` | Driver profiles and performance attributes |
+| `vehicles` | Vehicle information |
+| `locations` | Pickup and drop location information |
+| `trips` | Central ride transaction data |
+| `payments` | Payment transactions |
+| `ratings` | Rider and driver ratings |
+
+### Trip-Level Data
+
+The `trips` table contains information such as:
+
+- Request datetime
+- Pickup and drop locations
+- Distance
+- Trip duration
+- Fare
+- Surge multiplier
+- Payment method
+- Trip status
+- Cancellation reason
+
+> **Data note:** The dataset is synthetic and intended for portfolio and educational use. It is not affiliated with Uber, Ola, Lyft, Rapido, or any other ride-sharing company.
+
+### 📈 Dataset at a Glance (Actual Numbers)
+
+Real record counts and column highlights from the raw CSVs in [`data/raw/`](data/raw/):
+
+| Table | Rows | Size | Key Columns |
+|---|---|---|---|
+| `trips.csv` | 45,025 | 5.1 MB | request/pickup/drop datetime, distance_km, duration_min, fare_amount, trip_status |
+| `payments.csv` | 45,000 | 2.1 MB | amount, payment_method, payment_status |
+| `ratings.csv` | 35,507 | 1.0 MB | rider_rating_for_driver, driver_rating_for_rider |
+| `riders.csv` | 3,000 | 248 KB | age, city, signup_date, preferred_payment |
+| `drivers.csv` | 450 | 44 KB | city, license_number, driver_status, avg_rating |
+| `vehicles.csv` | 450 | 24 KB | vehicle_type, make, model, year |
+| `locations.csv` | 48 | 4 KB | city, area_name, latitude, longitude |
+
+**Trip period:** January 1, 2025 – October 30, 2025 (10 months)
+
+**Trip status breakdown:**
+
+| Status | Trips | Share |
+|---|---|---|
+| Completed | 35,527 | 78.9% |
+| Cancelled by Rider | 5,220 | 11.6% |
+| Cancelled by Driver | 3,330 | 7.4% |
+| No Driver Found | 948 | 2.1% |
+
+**Top cancellation reasons:** Changed plans, Price too high, Driver taking too long, Found alternate ride, Booked by mistake — each accounting for roughly 1,000–1,100 of the ~9,500 cancelled trips.
+
+**Cities covered:** Delhi, Mumbai, Bangalore, Chennai, Hyderabad, Pune (8 pickup/drop zones per city, 48 total)
+
+**Vehicle mix:** Economy (139), Bike (95), Auto (86), Premium (78), XL (52)
+
+**Payment methods:** UPI 35.3%, Card 29.8%, Wallet 20.0%, Cash 14.9%
+
+---
+
 ## 🔗 Project Navigation
 
 | Component | Description |
