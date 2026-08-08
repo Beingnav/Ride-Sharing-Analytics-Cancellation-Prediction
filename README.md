@@ -120,6 +120,68 @@ This project analyzes ride-sharing operations and customer behavior to identify 
 
 ---
 
+# 📈 Exploratory Data Analysis
+
+The project analyzes ride demand, revenue, cancellations, customer behavior, and operational performance using Python.
+
+### Key EDA Areas
+
+- 🚗 Trips by hour and day
+- 📍 City-level demand
+- 💰 Revenue and fare distribution
+- 👨‍✈️ Driver performance
+- 🚘 Vehicle performance
+- ❌ Cancellation behavior
+- 📈 Surge pricing
+- 👥 Customer activity
+- 🔗 Fare and trip-characteristic relationships
+
+## 📊 Selected Visualizations
+
+### Trips by Hour
+
+![Trips by Hour](images/eda/01_trips_by_hour.png)
+
+### Cancellation by Hour & Surge
+
+![Cancellation by Hour and Surge](images/eda/09_cancellation_by_hour_surge.png)
+
+### Correlation Analysis
+
+![Correlation Heatmap](images/eda/11_correlation_heatmap.png)
+
+[📂 View all EDA visualizations →](images/eda/)
+
+---
+
+# 🤖 Machine Learning Visualizations
+
+The machine-learning workflow evaluates classification performance and explains model predictions using SHAP.
+
+### Model Comparison
+
+![Model Comparison](images/ml/model_comparison.png)
+
+### ROC Curves
+
+![ROC Curve](images/ml/roc_curve.png)
+
+### Confusion Matrix
+
+![Confusion Matrix](images/ml/confusion_matrix.png)
+
+### SHAP Feature Importance
+
+![SHAP Feature Importance](images/ml/shap_feature_importance.png)
+
+### SHAP Summary
+
+![SHAP Summary](images/ml/04_shap_summary.png)
+
+[📂 View all ML visualizations →](images/ml/)
+
+---
+
 # 🤖 Machine Learning
 
 ## Prediction Objective
