@@ -369,44 +369,50 @@ This can support targeted retention and customer engagement strategies.
 
 ---
 
-# 📊 Power BI Dashboard
+# 📊 Business Intelligence Dashboard
 
-The project is designed around four business-focused dashboard pages.
+The project includes a four-page business intelligence dashboard designed to help operations and management teams monitor ride-sharing performance.
 
 ## 1️⃣ Executive Overview
 
-### KPIs
+### Key KPIs
 
-* Total Trips
-* Total Revenue
-* Completed Trips
-* Cancellation Rate
-* Active Riders
-* Active Drivers
-* Average Fare
-* Average Rating
+- Total Trips
+- Total Revenue
+- Completed Trips
+- Cancellation Rate
+- Active Riders
+- Active Drivers
+- Average Fare
+- Average Rating
 
-### Visuals
+### Business Questions
 
-* Revenue trend
-* Trip trend
-* City performance
-* Vehicle performance
+- How is overall business performance?
+- Is revenue increasing or decreasing?
+- What is the current cancellation rate?
+- Which cities and vehicle types perform best?
 
 ---
 
 ## 2️⃣ Demand & Operations
 
-### Visuals
+### Analysis
 
-* Hourly demand
-* Daily demand
-* Peak periods
-* Demand heatmap
-* City demand
-* Pickup locations
-* Drop locations
-* Cancellation reasons
+- Demand by hour
+- Demand by day
+- Peak booking periods
+- City-level demand
+- Pickup locations
+- Drop locations
+- Cancellation reasons
+- Surge pricing patterns
+
+### Business Questions
+
+- When should additional drivers be available?
+- Which cities experience the highest demand?
+- When are cancellation rates highest?
 
 ---
 
@@ -414,12 +420,18 @@ The project is designed around four business-focused dashboard pages.
 
 ### Analysis
 
-* Driver ranking
-* Revenue per driver
-* Trips per driver
-* Driver cancellation rate
-* Vehicle performance
-* Driver performance matrix
+- Driver revenue ranking
+- Trips per driver
+- Driver cancellation rate
+- Driver ratings
+- Vehicle-type performance
+- Driver performance comparison
+
+### Business Questions
+
+- Which drivers generate the most revenue?
+- Which drivers have higher cancellation rates?
+- Which vehicle types perform best?
 
 ---
 
@@ -427,51 +439,71 @@ The project is designed around four business-focused dashboard pages.
 
 ### Analysis
 
-* Active riders
-* New vs returning riders
-* RFM segmentation
-* Retention
-* Customer value
-* Cancellation probability
-* High-risk trips
+- Active customers
+- New vs returning customers
+- Customer retention
+- RFM segmentation
+- Customer value
+- Cancellation probability
+- High-risk trips
+- SHAP feature importance
 
-> Power BI Desktop is Windows-only and wasn't available to produce or
-> verify a real `.pbix` in the environment this project was built in. The
-> repository includes a hand-authored Power BI Project
-> (`powerbi/RideSharingAnalytics.pbip` — TMDL semantic model + a report
-> shell) plus the full DAX/build guide in [`powerbi/README.md`](powerbi/README.md)
-> for building the genuine dashboard in Power BI Desktop.
+### Business Questions
+
+- Which customers are most valuable?
+- Which customers may need retention efforts?
+- Which trips have the highest cancellation risk?
+- What factors contribute to cancellation risk?
 
 ---
 
-# 🖥️ Dashboard Preview
+## 💡 Business Insights
 
-Since a verified `.pbix` export isn't possible here, the four images below
-are matplotlib-composed previews built from the **actual pipeline data**
-(`data/processed/*.csv`) rather than real Power BI screenshots — the
-numbers are genuine, the rendering engine isn't Power BI. They already
-live in this repo:
+The analysis can support decisions in five major areas:
 
-```text
-dashboard/
-├── 01_executive_overview.png
-├── 02_demand_operations.png
-├── 03_driver_performance.png
-├── 04_customer_cancellation_risk.png
-└── generate_previews.py   ← regenerates all 4 from current data
-```
+### 🚗 Demand Optimization
+
+Use hourly, daily, and city-level demand patterns to improve driver allocation during peak periods.
+
+### ❌ Cancellation Reduction
+
+Use cancellation-risk predictions to identify potentially high-risk trips before operational issues occur.
+
+### 💰 Revenue Optimization
+
+Compare cities, routes, drivers, and vehicle types to identify stronger revenue opportunities.
+
+### 👨‍✈️ Driver Operations
+
+Monitor driver performance, ratings, utilization, and historical cancellation behavior.
+
+### 👥 Customer Retention
+
+Use customer segmentation and retention metrics to identify valuable and at-risk customers.
+
+---
+
+## 🖥️ Dashboard Preview
+
+> The current PNG dashboard previews are generated from the project data. They are not screenshots of Power BI Desktop.
+
+### Executive Overview
 
 ![Executive Overview](dashboard/01_executive_overview.png)
 
+### Demand & Operations
+
 ![Demand & Operations](dashboard/02_demand_operations.png)
+
+### Driver Performance
 
 ![Driver Performance](dashboard/03_driver_performance.png)
 
+### Customer & Cancellation Risk
+
 ![Customer & Cancellation Risk](dashboard/04_customer_cancellation_risk.png)
 
-> **If you build the real dashboard in Power BI Desktop:** export your own
-> screenshots over these four files (same filenames) so this section shows
-> the genuine report instead of the preview.
+[📂 View dashboard assets →](dashboard/)
 
 ---
 
