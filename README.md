@@ -593,7 +593,7 @@ http://localhost:8501
 
 ## 🌐 Live Demo
 
-**Coming soon**
+Running locally at [http://localhost:8501](http://localhost:8501).
 
 > The Streamlit application will be publicly deployed after final testing.
 
