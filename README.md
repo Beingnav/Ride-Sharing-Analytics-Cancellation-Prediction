@@ -101,26 +101,22 @@ This project analyzes ride-sharing operations and customer behavior to identify 
 
 ## 📊 Statistical Findings
 
-| Analysis                      |                    Result |
-| ------------------------------ | -------------------------: |
-| High-surge cancellation rate  |                 **29.7%** |
-| Lower-surge cancellation rate |                 **17.5%** |
-| Distance vs Fare              |             **r = 0.585** |
-| Duration vs Fare              |             **r = 0.563** |
+| Analysis | Result |
+|---|---:|
+| High-surge cancellation rate | **29.7%** |
+| Lower-surge cancellation rate | **17.5%** |
+| Distance vs Fare correlation | **r = 0.585** |
+| Duration vs Fare correlation | **r = 0.563** |
 | Driver Rating vs Cancellation | **r = -0.076, p < 0.001** |
-| Fare Regression               |            **R² = 0.391** |
+| Fare Regression | **R² = 0.391** |
 
-### Business Interpretation
+### Key Takeaways
 
-The analysis suggests that cancellation behavior is associated with factors such as:
-
-* Surge pricing
-* Peak-hour demand
-* Driver historical cancellation behavior
-* Driver ratings
-* Trip characteristics
-
-These relationships are further investigated using machine learning and SHAP.
+- 📈 Higher surge conditions are associated with a higher cancellation rate.
+- 💰 Distance and fare show a positive relationship.
+- ⏱️ Trip duration and fare also show a positive relationship.
+- 👨‍✈️ Driver rating has a statistically significant relationship with cancellation behavior.
+- 🤖 Statistical findings are further investigated through machine learning and SHAP explainability.
 
 ---
 
