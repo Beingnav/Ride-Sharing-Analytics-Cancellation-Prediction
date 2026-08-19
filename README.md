@@ -599,11 +599,22 @@ http://localhost:8501
 
 ## 🌐 Live Demo
 
-Running locally at [http://localhost:8501](http://localhost:8501).
+## 🌐 Live Demo
 
-📹 [Watch a 35s demo video](app/demo.mp4) of the Analytics Dashboard and Cancellation Risk Predictor.
+🚀 **[Open the Live Streamlit App](https://ride-sharing-analytics-cancellation-prediction-av3m9qq4knms3kh.streamlit.app/)**
 
-> The Streamlit application will be publicly deployed after final testing.
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ride-sharing-analytics-cancellation-prediction-av3m9qq4knms3kh.streamlit.app/)
+
+Explore the interactive Ride-Sharing Analytics Dashboard and Cancellation Risk Predictor directly in your browser.
+
+### Available in the Live Demo
+
+- 📊 Executive Overview
+- 🚗 Demand & Operations Analytics
+- 👨‍✈️ Driver Performance
+- 👥 Customer & Cancellation Risk
+- 🤖 Cancellation Risk Prediction
+- 🔎 SHAP-based Prediction Explanation
 
 ## 📖 Application Documentation
 
@@ -870,6 +881,7 @@ python -m venv .venv
 
 ```bash
 pip install -r requirements.txt
+streamlit run app/streamlit_app.py
 ```
 ---
 
