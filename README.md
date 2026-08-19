@@ -2,7 +2,7 @@
 
 ### End-to-End Data Analytics & Machine Learning Portfolio Project
 
-**SQL · Python · Statistics · Machine Learning · SHAP · Power BI · Streamlit**
+**SQL · Python · Statistics · Machine Learning · SHAP · Power BI · [Streamlit 🚀]([YOUR_REAL_STREAMLIT_URL](https://ride-sharing-analytics-cancellation-prediction-av3m9qq4knms3kh.streamlit.app/))**
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python)](https://www.python.org/)
 [![MySQL](https://img.shields.io/badge/MySQL-8.0-orange?logo=mysql)](https://www.mysql.com/)
